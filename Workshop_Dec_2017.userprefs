@@ -1,0 +1,40 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/DemoInfoDisplay.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ResponseManager.cs" Line="62" Column="1" />
+      <File FileName="Assets/Scripts/Editor/ResponseManagerEditor.cs" Line="116" Column="22" />
+      <File FileName="Assets/Scripts/MovementControl.cs" Line="18" Column="26" />
+      <File FileName="Assets/Scripts/Editor/MovementControlEditor.cs" Line="62" Column="79" />
+      <File FileName="Assets/Scripts/Properties and classes/Input.cs" Line="14" Column="65" />
+      <File FileName="Assets/Scripts/Properties and classes/InputPreset.cs" Line="5" Column="37" />
+      <File FileName="Assets/Scripts/TerrainTrigger.cs" Line="12" Column="49" />
+      <File FileName="Assets/Scripts/PropertyDrawers/ResponseCurveDrawer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Properties and classes/ResponseCurve.cs" Line="26" Column="23" />
+      <File FileName="Assets/Scripts/DemoInfoDisplay.cs" Line="19" Column="8" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Workshop_Dec_2017" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Properties and classes" expanded="True" />
+                <Node name="DemoInfoDisplay.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="Assembly-CSharp-Editor" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Editor" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -7,7 +7,6 @@ public enum AmountOfAxes {OneAxis, TwoAxes, ThreeAxes}
 [System.Serializable]
 public class Axes 
 {
-
 	public AmountOfAxes amount;
 	public bool xAxis = true;
 	public bool yAxis = false;

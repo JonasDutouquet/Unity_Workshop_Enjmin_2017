@@ -8,6 +8,7 @@ namespace ResponseControl
 	public class Input
 	{
 		public string name = "New Input";
+		public InputPreset presets;
 		public Axes axis;
 		public bool isStateDependent = false;
 		public List<ResponseCurve> curves = new List<ResponseCurve>();

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3322C29C-224B-0349-F6F5-B7A937C62EAC}</ProjectGuid>
+    <ProjectGuid>{72C6C65D-BDAB-7742-42F1-DADBB519AE1D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,9 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\DemoInfoDisplay.cs" />
      <Compile Include="Assets\Scripts\MovementControl.cs" />
      <Compile Include="Assets\Scripts\Properties and classes\Axes.cs" />
      <Compile Include="Assets\Scripts\Properties and classes\Input.cs" />
+     <Compile Include="Assets\Scripts\Properties and classes\InputPreset.cs" />
      <Compile Include="Assets\Scripts\Properties and classes\ResponseCurve.cs" />
      <Compile Include="Assets\Scripts\Properties and classes\TransitionCurve.cs" />
      <Compile Include="Assets\Scripts\PropertyDrawers\AxesDrawer.cs" />

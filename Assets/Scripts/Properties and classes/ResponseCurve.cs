@@ -21,9 +21,9 @@ public class ResponseCurve
 
 	private bool isTransition = false;
 
-	private string _x;
-	private string _y;
-	private string _z;
+	private string _x = "";
+	private string _y = "";
+	private string _z = "";
 
 	public bool isInvalid()
 	{
@@ -71,12 +71,12 @@ public class ResponseCurve
 	}
 
 	//called by the MovementControl script at start().
-	public void InitializeCurve(string x, string y, string z)
+	public void InitializeCurve(string x, string y, string z, bool xtrue, bool ytrue, bool ztrue)
 	{
 		InitializeReverseCurves ();
-		_x = x;
-		_y = y;
-		_z = z;
+		if(xtrue) _x = x;
+		if (ytrue) _y = y;
+		if (ztrue) _z = z;
 	}
 
 	void InitializeReverseCurves()

@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof (ResponseManager))]
+[RequireComponent(typeof (ResponseManager)), RequireComponent(typeof(Rigidbody))]
 public class MovementControl : MonoBehaviour
 {
 	public string associatedInput;
+	[HideInInspector] public bool xChecked;
+	[HideInInspector] public bool yChecked;
+	[HideInInspector] public bool zChecked;
 	[SerializeField] private string xInput = "Horizontal";
 	[SerializeField] private string yInput = "";
 	[SerializeField] private string zInput = "Vertical";
 	[SerializeField] private bool _useRb = false;
 	[SerializeField] private bool _allowRotation = false;
 	[SerializeField] private float _rotateSpeed = 5f;
-	[SerializeField] private float _currentSpeed = 0f;
+	[SerializeField] public float _currentSpeed = 0f;
 
-	private List<Terrain> terrains = new List<Terrain> ();
 	private ResponseCurve _currentCurve;
 	private List<ResponseCurve> curves = new List<ResponseCurve>();
 	private Rigidbody _rb;
@@ -24,14 +26,14 @@ public class MovementControl : MonoBehaviour
 	void Start()
 	{
 		_rb = GetComponent<Rigidbody> ();
+		_rb.constraints = RigidbodyConstraints.FreezeRotation;
 
 		_input = AssignInput ();
 
 		for (int i = 0 ; i< _input.curves.Count ; i++)
 		{
 			curves.Add (_input.curves[i]);
-			curves [i].InitializeCurve (xInput, yInput, zInput);
-			terrains.Add (new Terrain(curves[i].name, i));
+			curves [i].InitializeCurve (xInput, yInput, zInput, xChecked, yChecked, zChecked);
 		}
 		_currentCurve = curves [0];
 	}
@@ -51,23 +53,6 @@ public class MovementControl : MonoBehaviour
 			return null;
 	}
 
-	ResponseCurve AssignTerrain(string newTerrain)
-	{
-		for(int i = 0 ; i < curves.Count ; i++)
-		{
-			string id = curves[i].name;
-			if (id == newTerrain) 
-			{
-				Debug.Log ("This curve was assigned : " + curves [i].name);
-				return curves [i];
-			}
-		}
-		Debug.LogError ("No curve defined as '" + newTerrain + "'. \n Please check the names.");
-		Debug.Break ();
-		return null;
-	}
-
-
 	public void ChangeTerrain(int terrainIndex)
 	{
 		if(_input.isStateDependent) 
@@ -81,7 +66,6 @@ public class MovementControl : MonoBehaviour
 	{		
 		_currentMovement = _currentCurve.GetMovement(_currentMovement);
 		_currentSpeed = _currentMovement.speed;
-
 		Vector3 direction = _currentMovement.GetMovement ();
 
 		if (_useRb)

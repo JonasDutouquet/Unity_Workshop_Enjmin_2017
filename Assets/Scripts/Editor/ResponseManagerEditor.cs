@@ -18,15 +18,12 @@ public class ResponseManagerEditor : Editor
 	void OnEnable()
 	{
 		t = (ResponseManager)target;
-		//t.AddNew ();
 		GetTarget = new SerializedObject(t);
 		ThisList = GetTarget.FindProperty("inputs"); // Find the List in our script and create a refrence of it
 	}
 
 	public override void OnInspectorGUI()
 	{
-		//Update our list
-
 		GetTarget.Update();
 		var indent = EditorGUI.indentLevel;
 		EditorGUI.indentLevel = 0;
@@ -55,15 +52,15 @@ public class ResponseManagerEditor : Editor
 				SerializedProperty MyListRef = ThisList.GetArrayElementAtIndex (i);
 				SerializedProperty name = MyListRef.FindPropertyRelative ("name");
 				SerializedProperty axis = MyListRef.FindPropertyRelative ("axis");
-				//SerializedProperty inputType = MyListRef.FindPropertyRelative ("inputType");
-				//SerializedProperty axes = MyListRef.FindPropertyRelative ("axes");
-				//SerializedProperty movementType = MyListRef.FindPropertyRelative ("movementType");
+				SerializedProperty presetList = MyListRef.FindPropertyRelative ("presets");
 				SerializedProperty isDependent = MyListRef.FindPropertyRelative ("isStateDependent");
 				SerializedProperty curves = MyListRef.FindPropertyRelative ("curves");
+				SerializedProperty usePreset = presetList.FindPropertyRelative ("usePreset");
+				SerializedProperty controlScript = presetList.FindPropertyRelative ("controlScript");
 
 				EditorGUILayout.BeginHorizontal ();
 				EditorGUILayout.LabelField ("'" + t.inputs[i].name + "' input", EditorStyles.boldLabel);
-				//Remove this curve from the List
+				//Remove this input from the List
 				if (GUILayout.Button ("Delete input", GUILayout.ExpandWidth (false)))
 				{
 					t.Remove (i); 
@@ -72,11 +69,25 @@ public class ResponseManagerEditor : Editor
 				EditorGUILayout.EndHorizontal ();
 				EditorGUI.indentLevel = 1;
 
+				//INPUT NAME
 				EditorGUILayout.PropertyField (name);
+
+				//INPUT PRESETS
+				EditorGUILayout.BeginHorizontal ();
+				EditorGUILayout.PropertyField (usePreset);
+				EditorGUI.BeginDisabledGroup (!usePreset.boolValue);
+				InputPresetsEnum newPreset = (InputPresetsEnum)EditorGUILayout.EnumPopup (t.inputs[i].presets.presets, GUILayout.ExpandWidth (false));
+				if(newPreset != t.inputs [i].presets.presets)
+				{
+					t.inputs [i].presets.presets = newPreset;
+					t.ChangeInputPreset (newPreset, i);
+				}
+				EditorGUILayout.EndHorizontal ();
+				EditorGUI.EndDisabledGroup ();
+				EditorGUILayout.ObjectField (controlScript, typeof(MovementControl));
 
 				//THE AXIS...
 				EditorGUILayout.BeginHorizontal ();
-				//EditorGUILayout.LabelField ("Type", GUILayout.ExpandWidth (false));
 				AmountOfAxes newValue = (AmountOfAxes)EditorGUILayout.EnumPopup (t.inputs [i].axis.amount, GUILayout.ExpandWidth (false));
 				if(newValue != t.inputs [i].axis.amount)
 				{
@@ -169,10 +180,7 @@ public class ResponseManagerEditor : Editor
 										t.inputs [i].curves [c].AdjustCurve ();
 									}
 									EditorGUILayout.EndHorizontal ();
-
 								}
-								//else EditorGUILayout.HelpBox ("There is a problem with the curve.", MessageType.Warning);
-
 							} else
 								EditorGUILayout.HelpBox ("Please draw a curve.", MessageType.Warning);
 
